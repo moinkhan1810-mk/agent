@@ -1,8 +1,12 @@
 import os
 import streamlit as st
+import litellm
 from crewai import Agent, Task, Crew, Process, LLM
 from crewai.tools import tool
 from duckduckgo_search import DDGS
+
+# Enable global drop_params for LiteLLM
+litellm.drop_params = True
 
 # Page Configuration
 st.set_page_config(
@@ -73,10 +77,11 @@ def run_research_crew(topic: str, api_key: str, status_callback=None):
     # Set the Groq API key in environment for LiteLLM
     os.environ["GROQ_API_KEY"] = api_key
 
-    # Initialize CrewAI native LLM wrapper
+    # Pass drop_params=True explicitly to the LLM instance
     llm = LLM(
         model="groq/llama-3.3-70b-versatile",
-        temperature=0.3
+        temperature=0.3,
+        drop_params=True
     )
 
     researcher = Agent(

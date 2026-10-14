@@ -70,10 +70,12 @@ def web_search_tool(query: str) -> str:
 
 # Main Execution Function
 def run_research_crew(topic: str, api_key: str, status_callback=None):
-    # Initialize CrewAI native LLM wrapper with Groq
+    # Set the Groq API key in environment for LiteLLM
+    os.environ["GROQ_API_KEY"] = api_key
+
+    # Initialize CrewAI native LLM wrapper
     llm = LLM(
         model="groq/llama-3.3-70b-versatile",
-        api_key=api_key,
         temperature=0.3
     )
 

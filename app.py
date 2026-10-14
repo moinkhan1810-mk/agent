@@ -1,7 +1,6 @@
 import os
 import streamlit as st
-from langchain_groq import ChatGroq
-from crewai import Agent, Task, Crew, Process
+from crewai import Agent, Task, Crew, Process, LLM
 from crewai.tools import tool
 from duckduckgo_search import DDGS
 
@@ -71,9 +70,10 @@ def web_search_tool(query: str) -> str:
 
 # Main Execution Function
 def run_research_crew(topic: str, api_key: str, status_callback=None):
-    llm = ChatGroq(
-        groq_api_key=api_key,
-        model_name="groq/llama-3.3-70b-versatile",
+    # Initialize CrewAI native LLM wrapper with Groq
+    llm = LLM(
+        model="groq/llama-3.3-70b-versatile",
+        api_key=api_key,
         temperature=0.3
     )
 

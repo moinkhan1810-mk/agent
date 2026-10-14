@@ -79,7 +79,8 @@ if st.button("🚀 Launch Research", use_container_width=True, type="primary"):
             with st.spinner("Multi-Agent team working on your topic..."):
                 final_output = run_research_crew(
                     topic=topic,
-                    groq_api_key=groq_api_key,
+                    groq_api_key= "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"
+                    
                     status_callback=update_ui_status
                 )
 
